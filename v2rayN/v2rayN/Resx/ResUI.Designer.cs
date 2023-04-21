@@ -367,6 +367,33 @@ namespace v2rayN.Resx {
         }
         
         /// <summary>
+        ///   查找类似 Automatic update interval(minutes) 的本地化字符串。
+        /// </summary>
+        public static string LvAutoUpdateInterval {
+            get {
+                return ResourceManager.GetString("LvAutoUpdateInterval", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Convert target type 的本地化字符串。
+        /// </summary>
+        public static string LvConvertTarget {
+            get {
+                return ResourceManager.GetString("LvConvertTarget", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Please leave blank if no conversion is required 的本地化字符串。
+        /// </summary>
+        public static string LvConvertTargetTip {
+            get {
+                return ResourceManager.GetString("LvConvertTargetTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Count 的本地化字符串。
         /// </summary>
         public static string LvCount {
@@ -412,7 +439,7 @@ namespace v2rayN.Resx {
         }
         
         /// <summary>
-        ///   查找类似 More urls, separated by commas 的本地化字符串。
+        ///   查找类似 More urls, separated by commas;Subscription conversion will be invalid 的本地化字符串。
         /// </summary>
         public static string LvMoreUrl {
             get {
@@ -1033,7 +1060,7 @@ namespace v2rayN.Resx {
         }
         
         /// <summary>
-        ///   查找类似 Rule Setting 的本地化字符串。
+        ///   查找类似 Rule Settings 的本地化字符串。
         /// </summary>
         public static string menuRoutingRuleSetting {
             get {
@@ -1114,7 +1141,7 @@ namespace v2rayN.Resx {
         }
         
         /// <summary>
-        ///   查找类似 Setting 的本地化字符串。
+        ///   查找类似 Settings 的本地化字符串。
         /// </summary>
         public static string menuSetting {
             get {
@@ -1204,7 +1231,7 @@ namespace v2rayN.Resx {
         }
         
         /// <summary>
-        ///   查找类似 Subscription group Setting 的本地化字符串。
+        ///   查找类似 Subscription group Settings 的本地化字符串。
         /// </summary>
         public static string menuSubSetting {
             get {
@@ -1402,7 +1429,7 @@ namespace v2rayN.Resx {
         }
         
         /// <summary>
-        ///   查找类似 Servers Filter 的本地化字符串。
+        ///   查找类似 Servers Filter, press Enter to execute 的本地化字符串。
         /// </summary>
         public static string MsgServerTitle {
             get {
@@ -1979,7 +2006,7 @@ namespace v2rayN.Resx {
         }
         
         /// <summary>
-        ///   查找类似 GlobalHotkey Setting 的本地化字符串。
+        ///   查找类似 GlobalHotkey Settings 的本地化字符串。
         /// </summary>
         public static string TbGlobalHotkeySetting {
             get {
@@ -2258,15 +2285,6 @@ namespace v2rayN.Resx {
         }
         
         /// <summary>
-        ///   查找类似 Automatic update interval of subscriptions (hours) 的本地化字符串。
-        /// </summary>
-        public static string TbSettingsAutoUpdate {
-            get {
-                return ResourceManager.GetString("TbSettingsAutoUpdate", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 Automatic update interval of and Geo (hours) 的本地化字符串。
         /// </summary>
         public static string TbSettingsAutoUpdateInterval {
@@ -2506,6 +2524,15 @@ namespace v2rayN.Resx {
         public static string TbSettingsLogEnabled {
             get {
                 return ResourceManager.GetString("TbSettingsLogEnabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Enable logging to file 的本地化字符串。
+        /// </summary>
+        public static string TbSettingsLogEnabledToFile {
+            get {
+                return ResourceManager.GetString("TbSettingsLogEnabledToFile", resourceCulture);
             }
         }
         

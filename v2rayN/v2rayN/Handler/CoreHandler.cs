@@ -9,13 +9,13 @@ namespace v2rayN.Handler
     /// <summary>
     /// Core process processing class
     /// </summary>
-    class CoreHandler
+    internal class CoreHandler
     {
         private static string _coreCConfigRes = Global.coreConfigFileName;
         private CoreInfo? _coreInfo;
         private int _processId = 0;
         private Process? _process;
-        Action<bool, string> _updateFunc;
+        private Action<bool, string> _updateFunc;
 
         public CoreHandler(Action<bool, string> update)
         {
@@ -119,7 +119,6 @@ namespace v2rayN.Handler
                     CoreStopPid(_processId);
                     _processId = 0;
                 }
-
             }
             catch (Exception ex)
             {
@@ -196,12 +195,21 @@ namespace v2rayN.Handler
                             string msg = e.Data + Environment.NewLine;
                             ShowMsg(false, msg);
                         }
+                    }; 
+                    p.ErrorDataReceived += (sender, e) =>
+                    {
+                        if (!string.IsNullOrEmpty(e.Data))
+                        {
+                            string msg = e.Data + Environment.NewLine;
+                            ShowMsg(false, msg);
+                        }
                     };
                 }
                 p.Start();
                 if (displayLog)
                 {
                     p.BeginOutputReadLine();
+                    p.BeginErrorReadLine();
                 }
                 _process = p;
 
@@ -214,7 +222,7 @@ namespace v2rayN.Handler
             }
             catch (Exception ex)
             {
-                Utils.SaveLog(Utils.ToJson(node));
+                //Utils.SaveLog(Utils.ToJson(node));
                 Utils.SaveLog(ex.Message, ex);
                 string msg = ex.Message;
                 ShowMsg(true, msg);
@@ -255,8 +263,17 @@ namespace v2rayN.Handler
                         ShowMsg(false, msg);
                     }
                 };
+                p.ErrorDataReceived += (sender, e) =>
+                {
+                    if (!string.IsNullOrEmpty(e.Data))
+                    {
+                        string msg = e.Data + Environment.NewLine;
+                        ShowMsg(false, msg);
+                    }
+                };
                 p.Start();
                 p.BeginOutputReadLine();
+                p.BeginErrorReadLine();
 
                 p.StandardInput.Write(configStr);
                 p.StandardInput.Close();

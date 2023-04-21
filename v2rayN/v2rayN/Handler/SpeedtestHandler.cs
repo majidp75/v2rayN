@@ -7,13 +7,13 @@ using v2rayN.Resx;
 
 namespace v2rayN.Handler
 {
-    class SpeedtestHandler
+    internal class SpeedtestHandler
     {
         private Config _config;
         private CoreHandler _coreHandler;
         private List<ServerTestItem> _selecteds;
         private ESpeedActionType _actionType;
-        Action<string, string, string> _updateFunc;
+        private Action<string, string, string> _updateFunc;
 
         public SpeedtestHandler(Config config)
         {
@@ -57,10 +57,12 @@ namespace v2rayN.Handler
                         UpdateFunc(it.indexId, ResUI.Speedtesting, "");
                         ProfileExHandler.Instance.SetTestDelay(it.indexId, "0");
                         break;
+
                     case ESpeedActionType.Speedtest:
                         UpdateFunc(it.indexId, "", ResUI.SpeedtestingWait);
                         ProfileExHandler.Instance.SetTestSpeed(it.indexId, "0");
                         break;
+
                     case ESpeedActionType.Mixedtest:
                         UpdateFunc(it.indexId, ResUI.Speedtesting, ResUI.SpeedtestingWait);
                         ProfileExHandler.Instance.SetTestDelay(it.indexId, "0");
@@ -74,15 +76,19 @@ namespace v2rayN.Handler
                 case ESpeedActionType.Ping:
                     Task.Run(RunPing);
                     break;
+
                 case ESpeedActionType.Tcping:
                     Task.Run(RunTcping);
                     break;
+
                 case ESpeedActionType.Realping:
                     Task.Run(RunRealPing);
                     break;
+
                 case ESpeedActionType.Speedtest:
                     Task.Run(RunSpeedTestAsync);
                     break;
+
                 case ESpeedActionType.Mixedtest:
                     Task.Run(RunMixedtestAsync);
                     break;
@@ -112,7 +118,6 @@ namespace v2rayN.Handler
                 Utils.SaveLog(ex.Message, ex);
             }
         }
-
 
         private void RunPing()
         {
@@ -169,7 +174,6 @@ namespace v2rayN.Handler
                     {
                         try
                         {
-
                             WebProxy webProxy = new(Global.Loopback, it.port);
                             string output = GetRealPingTime(downloadHandle, webProxy);
 
@@ -243,7 +247,7 @@ namespace v2rayN.Handler
 
                 WebProxy webProxy = new(Global.Loopback, it.port);
 
-                await downloadHandle.DownloadDataAsync(url, webProxy, timeout, async (bool success, string msg) =>
+                await downloadHandle.DownloadDataAsync(url, webProxy, timeout, (bool success, string msg) =>
                 {
                     decimal.TryParse(msg, out decimal dec);
                     if (dec > 0)
@@ -287,6 +291,11 @@ namespace v2rayN.Handler
                 {
                     continue;
                 }
+                if (it.delay < 0)
+                {
+                    UpdateFunc(it.indexId, "", ResUI.SpeedtestingSkip);
+                    continue;
+                }
                 ProfileExHandler.Instance.SetTestSpeed(it.indexId, "-1");
                 UpdateFunc(it.indexId, "", ResUI.Speedtesting);
 
@@ -294,7 +303,7 @@ namespace v2rayN.Handler
                 if (item is null) continue;
 
                 WebProxy webProxy = new(Global.Loopback, it.port);
-                _ = downloadHandle.DownloadDataAsync(url, webProxy, timeout, async (bool success, string msg) =>
+                _ = downloadHandle.DownloadDataAsync(url, webProxy, timeout, (bool success, string msg) =>
                 {
                     decimal.TryParse(msg, out decimal dec);
                     if (dec > 0)
@@ -364,7 +373,6 @@ namespace v2rayN.Handler
             }
             return responseTime;
         }
-
 
         /// <summary>
         /// Ping

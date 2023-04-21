@@ -48,12 +48,10 @@ namespace v2rayN
             Utils.SaveLog($"v2rayN start up | {Utils.GetVersion()} | {Utils.GetExePath()}");
             Logging.ClearLogs();
 
-
             Thread.CurrentThread.CurrentUICulture = new(_config.uiItem.currentLanguage);
 
             base.OnStartup(e);
         }
-
 
         private void Init()
         {
@@ -64,7 +62,12 @@ namespace v2rayN
                 Environment.Exit(0);
                 return;
             }
+            //if (RuntimeInformation.ProcessArchitecture != Architecture.X86 && RuntimeInformation.ProcessArchitecture != Architecture.X64)
+            //{
+            //    _config.guiItem.enableStatistics = false;
+            //}
         }
+
         private void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
             Utils.SaveLog("App_DispatcherUnhandledException", e.Exception);
@@ -79,7 +82,7 @@ namespace v2rayN
             }
         }
 
-        private void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
+        private void TaskScheduler_UnobservedTaskException(object? sender, UnobservedTaskExceptionEventArgs e)
         {
             Utils.SaveLog("TaskScheduler_UnobservedTaskException", e.Exception);
         }

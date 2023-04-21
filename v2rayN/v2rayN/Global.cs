@@ -1,8 +1,9 @@
 ﻿namespace v2rayN
 {
-    class Global
+    internal class Global
     {
         #region const
+
         public const string githubUrl = "https://github.com";
         public const string githubApiUrl = "https://api.github.com/repos";
         public const string v2rayWebsiteUrl = @"https://www.v2fly.org/";
@@ -89,18 +90,31 @@
                         "http=http://{ip}:{http_port};https=http://{ip}:{http_port}",
                         ""
                     };
-        public static readonly List<string> vmessSecuritys = new() { "aes-128-gcm", "chacha20-poly1305", "auto", "none", "zero" };
-        public static readonly List<string> ssSecuritys = new() { "aes-256-gcm", "aes-128-gcm", "chacha20-poly1305", "chacha20-ietf-poly1305", "none", "plain" };
-        public static readonly List<string> ssSecuritysInSagerNet = new() { "none", "2022-blake3-aes-128-gcm", "2022-blake3-aes-256-gcm", "2022-blake3-chacha20-poly1305", "aes-128-gcm", "aes-192-gcm", "aes-256-gcm", "chacha20-ietf-poly1305", "xchacha20-ietf-poly1305", "rc4", "rc4-md5", "aes-128-ctr", "aes-192-ctr", "aes-256-ctr", "aes-128-cfb", "aes-192-cfb", "aes-256-cfb", "aes-128-cfb8", "aes-192-cfb8", "aes-256-cfb8", "aes-128-ofb", "aes-192-ofb", "aes-256-ofb", "bf-cfb", "cast5-cfb", "des-cfb", "idea-cfb", "rc2-cfb", "seed-cfb", "camellia-128-cfb", "camellia-192-cfb", "camellia-256-cfb", "camellia-128-cfb8", "camellia-192-cfb8", "camellia-256-cfb8", "salsa20", "chacha20", "chacha20-ietf", "xchacha20" };
-        public static readonly List<string> ssSecuritysInXray = new() { "aes-256-gcm", "aes-128-gcm", "chacha20-poly1305", "chacha20-ietf-poly1305", "xchacha20-poly1305", "xchacha20-ietf-poly1305", "none", "plain", "2022-blake3-aes-128-gcm", "2022-blake3-aes-256-gcm", "2022-blake3-chacha20-poly1305" };
-        public static readonly List<string> flows = new() { "", "xtls-rprx-vision", "xtls-rprx-vision-udp443" };
-        public static readonly List<string> networks = new() { "tcp", "kcp", "ws", "h2", "quic", "grpc" };
-        public static readonly List<string> kcpHeaderTypes = new() { "srtp", "utp", "wechat-video", "dtls", "wireguard" };
-        public static readonly List<string> coreTypes = new() { "v2fly", "SagerNet", "Xray", "v2fly_v5" };
-        public static readonly List<string> domainStrategys = new() { "AsIs", "IPIfNonMatch", "IPOnDemand" };
-        public static readonly List<string> domainMatchers = new() { "linear", "mph", "" };
-        public static readonly List<string> fingerprints = new() { "chrome", "firefox", "safari", "ios", "android", "edge", "360", "qq", "random", "randomized", "" };
-        public static readonly List<string> userAgent = new() { "chrome", "firefox", "safari", "edge", "none" };
+
+        public static readonly List<string> SubConvertUrls = new List<string> {
+                @"https://sub.xeton.dev/sub?url={0}",
+                @"https://api.dler.io/sub?url={0}",
+                @"http://127.0.0.1:25500/sub?url={0}",
+                ""
+            };
+
+        public static readonly List<string> SubConvertConfig = new List<string> {
+                @"https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online.ini"
+            };
+
+        public static readonly List<string> SubConvertTargets = new List<string> {
+                "",
+                "mixed",
+                "v2ray",
+                "clash",
+                "ss",
+            };
+
+        public static readonly List<string> SpeedTestUrls = new() {
+            @"http://cachefly.cachefly.net/100mb.test",
+            @"http://cachefly.cachefly.net/10mb.test"
+        };
+
         public static readonly Dictionary<string, string> userAgentTxt = new()
         {
             {"chrome","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36" },
@@ -109,6 +123,21 @@
             {"edge","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36 Edg/91.0.864.70" },
             {"none",""}
         };
+
+        public static readonly List<string> vmessSecuritys = new() { "aes-128-gcm", "chacha20-poly1305", "auto", "none", "zero" };
+        public static readonly List<string> ssSecuritys = new() { "aes-256-gcm", "aes-128-gcm", "chacha20-poly1305", "chacha20-ietf-poly1305", "none", "plain" };
+        public static readonly List<string> ssSecuritysInSagerNet = new() { "none", "2022-blake3-aes-128-gcm", "2022-blake3-aes-256-gcm", "2022-blake3-chacha20-poly1305", "aes-128-gcm", "aes-192-gcm", "aes-256-gcm", "chacha20-ietf-poly1305", "xchacha20-ietf-poly1305", "rc4", "rc4-md5", "aes-128-ctr", "aes-192-ctr", "aes-256-ctr", "aes-128-cfb", "aes-192-cfb", "aes-256-cfb", "aes-128-cfb8", "aes-192-cfb8", "aes-256-cfb8", "aes-128-ofb", "aes-192-ofb", "aes-256-ofb", "bf-cfb", "cast5-cfb", "des-cfb", "idea-cfb", "rc2-cfb", "seed-cfb", "camellia-128-cfb", "camellia-192-cfb", "camellia-256-cfb", "camellia-128-cfb8", "camellia-192-cfb8", "camellia-256-cfb8", "salsa20", "chacha20", "chacha20-ietf", "xchacha20" };
+        public static readonly List<string> ssSecuritysInXray = new() { "aes-256-gcm", "aes-128-gcm", "chacha20-poly1305", "chacha20-ietf-poly1305", "xchacha20-poly1305", "xchacha20-ietf-poly1305", "none", "plain", "2022-blake3-aes-128-gcm", "2022-blake3-aes-256-gcm", "2022-blake3-chacha20-poly1305" };
+        public static readonly List<string> flows = new() { "", "xtls-rprx-vision", "xtls-rprx-vision-udp443" };
+        public static readonly List<string> networks = new() { "tcp", "kcp", "ws", "h2", "quic", "grpc" };
+        public static readonly List<string> kcpHeaderTypes = new() { "srtp", "utp", "wechat-video", "dtls", "wireguard" };
+        public static readonly List<string> coreTypes = new() { "v2fly", "SagerNet", "Xray", "v2fly_v5" };
+        public static readonly List<string> coreTypes4VLESS = new() { "Xray" };
+        public static readonly List<string> domainStrategys = new() { "AsIs", "IPIfNonMatch", "IPOnDemand" };
+        public static readonly List<string> domainMatchers = new() { "linear", "mph", "" };
+        public static readonly List<string> fingerprints = new() { "chrome", "firefox", "safari", "ios", "android", "edge", "360", "qq", "random", "randomized", "" };
+        public static readonly List<string> userAgent = new() { "chrome", "firefox", "safari", "edge", "none" };
+
         public static readonly List<string> allowInsecures = new() { "true", "false", "" };
         public static readonly List<string> domainStrategy4Freedoms = new() { "AsIs", "UseIP", "UseIPv4", "UseIPv6", "" };
         public static readonly List<string> Languages = new() { "zh-Hans", "en", "fa-Ir", "ru" };
@@ -119,9 +148,8 @@
         public static readonly List<string> TunMtus = new() { "9000", "1500" };
         public static readonly List<string> TunStacks = new() { "gvisor", "system" };
         public static readonly List<string> PresetMsgFilters = new() { "proxy", "direct", "block", "" };
-        public static readonly List<string> SpeedTestUrls = new() { @"http://cachefly.cachefly.net/100mb.test", @"http://cachefly.cachefly.net/10mb.test" };
 
-        #endregion
+        #endregion const
 
         #region global variable
 
@@ -130,7 +158,6 @@
         public static bool ShowInTaskbar { get; set; }
         public static string ExePathKey { get; set; }
 
-        #endregion
-
+        #endregion global variable
     }
 }
